@@ -1,0 +1,33 @@
+.tool-bar {
+  position: fixed;
+  bottom: 10px;
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
+
+.tool-bar-content {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 10px;
+  background-color: #2c2c2c;
+  border-radius: 5px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, .35), 0px 1px 3px rgba(0, 0, 0, .5), inset 0px 1px 0px rgba(255, 255, 255, .08), inset 0px 0px 1px rgba(255, 255, 255, .3);;
+}
+
+.tool-bar-item {
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 14px;
+}
+
+.tool-bar-item:hover {
+  background-color: rgb(49, 49, 49);
+}
+
+.tool-bar-content .tool-bar-item-selected {
+  background-color: rgb(36, 127, 227);
+}
+
