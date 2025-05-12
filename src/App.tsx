@@ -27,6 +27,36 @@ function App() {
   const init = async () => {
     const canvaskit = await InitCnavas()
     const pen = new PenV2(document.getElementById('canvas') as HTMLCanvasElement)
+    pen.updateVectorNetwork = () => {
+      if (!selectNode.current && pen.vectorNetwork.vertices[0]) {
+        console.log(pen.vectorNetwork.vertices,'pen.vectorNetwork')
+        const element = new VectorNode({
+          transform: { m00: 1, m01: 0, m02: pen.vectorNetwork.vertices[0].x, m10: 0, m11: 1, m12: pen.vectorNetwork.vertices[0].y },
+          vectorData: {
+            vectorNetwork: {
+              segments: [],
+              vertices: [{
+                x: 0,
+                y: 0
+              }]
+            }
+          }
+        } as any, canvaskit)
+        vectorNodes.current.push(element)
+        selectNode.current = element
+      }
+      if (!selectNode.current || !penRef.current) return
+      const [a, c, e, b, d, f] = selectNode.current.invertTransform
+      selectNode.current.node.vectorData.vectorNetwork = {
+        ...penRef.current.vectorNetwork,
+        vertices: penRef.current.vectorNetwork.vertices.map(item => ({
+          ...item,
+          x: a * item.x + c * item.y + e,
+          y: b * item.x + d * item.y + f
+        }))
+      }
+      selectNode.current._bound = undefined
+    }
     pen.currentState = currentTool
     penRef.current = pen
     vectorNodes.current = elements.map(item => new VectorNode(item as ElementNode, canvaskit))
