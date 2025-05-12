@@ -2,10 +2,8 @@ import initCanvasKit, { Canvas, CanvasKit, Paint, Path } from "canvaskit-wasm";
 import CanvasKitWasm from "../../assets/canvaskit.wasm?url";
 import { PenV2 } from "./penV2";
 import { isNull } from "lodash";
-import { VectorNetwork, VectorPaths, VectorVertex } from "../../type/figmaType";
+import { VectorVertex } from "../../type/figmaType";
 import { PenSelect } from "./select";
-import { daa } from "./daa";
-import { ElementNode } from "../../type";
 import { VectorNode } from "./vectorNode";
 
 export const InitCnavas = async () =>
@@ -129,7 +127,7 @@ export class Render {
     this.renderNextTangetLine()
 
     // 渲染选中线条
-    this.pen.vectorNetwork.segments.forEach((item, index) => {
+    this.pen.vectorNetwork.segments.forEach((_, index) => {
       const hoverTest = this.penSelect.hoverTest
       const isHover = hoverTest && hoverTest.type === 'segment' && hoverTest.index === index
       const isSelect = this.penSelect.selectSegment === index

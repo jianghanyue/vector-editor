@@ -48,7 +48,7 @@ function App() {
       render.current?.setSelectVectorNode(hoverNode.current)
     })
 
-    window.addEventListener('dblclick', (e) => {
+    window.addEventListener('dblclick', () => {
       if (hoverNode.current && penRef.current) {
         selectNode.current = hoverNode.current
         const vn = cloneDeep(hoverNode.current.vectorNetwork) as VectorNetwork
